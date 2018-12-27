@@ -1,29 +1,29 @@
-import Calendar from './Calendar'
-import CalendarAgenda from './CalendarAgenda'
-import CalendarAgendaEvent from './CalendarAgendaEvent'
-import CalendarAllDayEvents from './CalendarAllDayEvents'
-import CalendarDayColumn from './CalendarDayColumn'
-import CalendarDayLabels from './CalendarDayLabels'
-import CalendarEvent from './CalendarEvent'
-import CalendarEventDetail from './CalendarEventDetail'
-import CalendarHeaderNav from './CalendarHeaderNav'
-import CalendarMonth from './CalendarMonth'
-import CalendarTimeLabelColumn from './CalendarTimeLabelColumn'
-import CalendarMultiDay from './CalendarMultiDay'
+import QEventCalendar from './Calendar'
+import QEventCalendarAgenda from './CalendarAgenda'
+import QEventCalendarAgendaEvent from './CalendarAgendaEvent'
+import QEventCalendarAllDayEvents from './CalendarAllDayEvents'
+import QEventCalendarDayColumn from './CalendarDayColumn'
+import QEventCalendarDayLabels from './CalendarDayLabels'
+import QEventCalendarEvent from './CalendarEvent'
+import QEventCalendarEventDetail from './CalendarEventDetail'
+import QEventCalendarHeaderNav from './CalendarHeaderNav'
+import QEventCalendarMonth from './CalendarMonth'
+import QEventCalendarTimeLabelColumn from './CalendarTimeLabelColumn'
+import QEventCalendarMultiDay from './CalendarMultiDay'
 import QuantityBubble from './QuantityBubble'
 
 export {
-  Calendar,
-  CalendarAgenda,
-  CalendarAgendaEvent,
-  CalendarAllDayEvents,
-  CalendarDayColumn,
-  CalendarDayLabels,
-  CalendarEvent,
-  CalendarEventDetail,
-  CalendarHeaderNav,
-  CalendarMonth,
-  CalendarTimeLabelColumn,
-  CalendarMultiDay,
+  QEventCalendar,
+  QEventCalendarAgenda,
+  QEventCalendarAgendaEvent,
+  QEventCalendarAllDayEvents,
+  QEventCalendarDayColumn,
+  QEventCalendarDayLabels,
+  QEventCalendarEvent,
+  QEventCalendarEventDetail,
+  QEventCalendarHeaderNav,
+  QEventCalendarMonth,
+  QEventCalendarTimeLabelColumn,
+  QEventCalendarMultiDay,
   QuantityBubble
 }

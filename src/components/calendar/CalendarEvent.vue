@@ -26,12 +26,12 @@
     QBtn,
     QTooltip
   } from 'quasar'
-  import CalendarMixin from './mixins/CalendarMixin'
-  import CalendarEventMixin from './mixins/CalendarEventMixin'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarEventMixin from './mixins/CalendarEventMixin'
   import dashHas from 'lodash.has'
   const { DateTime } = require('luxon')
   export default {
-    name: 'CalendarEvent',
+    name: 'QEventCalendarEvent',
     props: {
       eventObject: {
         type: Object,
@@ -77,7 +77,7 @@
       QBtn,
       QTooltip
     },
-    mixins: [CalendarMixin, CalendarEventMixin],
+    mixins: [QEventCalendarMixin, QEventCalendarEventMixin],
     data () {
       return {}
     },

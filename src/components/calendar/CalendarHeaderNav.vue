@@ -29,7 +29,7 @@
     QBtn
   } from 'quasar'
   export default {
-    name: 'CalendarHeaderNav',
+    name: 'QEventCalendarHeaderNav',
     props: {
       timePeriodUnit: {
         type: String,

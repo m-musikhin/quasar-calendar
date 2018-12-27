@@ -48,7 +48,7 @@
               </div>
             </div>
             <div class="col row calendar-agenda-events">
-              <calendar-agenda-event
+              <q-event-calendar-agenda-event
                 v-if="dateGetEvents(forwardDate, true)"
                 v-for="thisEvent in dateGetEvents(forwardDate)"
                 :key="makeDT(forwardDate).toISODate() + getEventIdString(thisEvent)"
@@ -68,7 +68,7 @@
     <!-- content circle style -->
     <div v-else>
       <!-- calendar header -->
-      <calendar-header-nav
+      <q-event-calendar-header-nav
         time-period-unit="days"
         :time-period-amount="1"
         :move-time-period-emit="eventRef + ':navMovePeriod'"
@@ -113,7 +113,7 @@
                 v-for="thisEvent in dateGetEvents(forwardDate, true)"
                 :key="makeDT(forwardDate).toISODate() + getEventIdString(thisEvent)"
               >
-                <calendar-agenda-event
+                <q-event-calendar-agenda-event
                   :event-object="thisEvent"
                   :event-ref="eventRef"
                   :calendar-locale="calendarLocale"
@@ -127,7 +127,7 @@
       </div>
     </div>
 
-    <calendar-event-detail
+    <q-event-calendar-event-detail
       ref="defaultEventDetail"
       v-if="!preventEventDetail"
       :event-object="eventDetailEventObject"
@@ -139,12 +139,12 @@
 </template>
 
 <script>
-  import CalendarMixin from './mixins/CalendarMixin'
-  import CalendarEventMixin from './mixins/CalendarEventMixin'
-  import CalendarParentComponentMixin from './mixins/CalendarParentComponentMixin'
-  import CalendarAgendaEvent from './CalendarAgendaEvent'
-  import CalendarEventDetail from './CalendarEventDetail'
-  import CalendarHeaderNav from './CalendarHeaderNav'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarEventMixin from './mixins/CalendarEventMixin'
+  import QEventCalendarParentComponentMixin from './mixins/CalendarParentComponentMixin'
+  import QEventCalendarAgendaEvent from './CalendarAgendaEvent'
+  import QEventCalendarEventDetail from './CalendarEventDetail'
+  import QEventCalendarHeaderNav from './CalendarHeaderNav'
   import {
     date,
     QBtn,
@@ -154,18 +154,18 @@
     QSpinnerDots
   } from 'quasar'
   export default {
-    name: 'CalendarAgenda',
+    name: 'QEventCalendarAgenda',
     components: {
-      CalendarAgendaEvent,
-      CalendarEventDetail,
-      CalendarHeaderNav,
+      QEventCalendarAgendaEvent,
+      QEventCalendarEventDetail,
+      QEventCalendarHeaderNav,
       QBtn,
       QTooltip,
       QScrollArea,
       QInfiniteScroll,
       QSpinnerDots
     },
-    mixins: [CalendarParentComponentMixin, CalendarMixin, CalendarEventMixin],
+    mixins: [QEventCalendarParentComponentMixin, QEventCalendarMixin, QEventCalendarEventMixin],
     props: {
       agendaStyle: {
         type: String,

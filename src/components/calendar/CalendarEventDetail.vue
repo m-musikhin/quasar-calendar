@@ -335,10 +335,10 @@
     QDatetime,
     QInput
   } from 'quasar'
-  import CalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
   const { DateTime } = require('luxon')
   export default {
-    name: 'CalendarEventDetail',
+    name: 'QEventCalendarEventDetail',
     props: {
       eventObject: {
         type: Object,
@@ -379,7 +379,7 @@
       QDatetime,
       QInput
     },
-    mixins: [CalendarMixin],
+    mixins: [QEventCalendarMixin],
     data () {
       return {
         modalIsOpen: false,

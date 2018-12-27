@@ -44,14 +44,14 @@
 </template>
 
 <script>
-  import CalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
   import {
     QBtn,
     QTooltip
   } from 'quasar'
   const { DateTime } = require('luxon')
   export default {
-    name: 'CalendarAgendaEvent',
+    name: 'QEventCalendarAgendaEvent',
     props: {
       eventObject: {
         type: Object,
@@ -95,7 +95,7 @@
       QBtn,
       QTooltip
     },
-    mixins: [CalendarMixin],
+    mixins: [QEventCalendarMixin],
     data () {
       return {}
     },

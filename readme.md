@@ -1,4 +1,5 @@
-# Quasar Calendar
+# Quasar Event Calendar
+(based on project [Quasar Calendar by Stormseed](https://github.com/stormseed/quasar-calendar))
 An event display calendar for the Quasar framework. This is still a work in progress project but we're putting in functionality and squashing bugs on a consistent basis.
 
 ![screenshot](https://stormseed.github.io/quasar-calendar-demo/statics/quasar_calendar_snap.png)
@@ -18,29 +19,29 @@ npm install quasar-calendar
 Add Calendar to you .vue page similar to a a Quasar component
 
 ```js
-import { Calendar } from 'quasar-calendar'
+import { QEventCalendar } from 'quasar-calendar'
 ```
 
 or import individual components
 
 ```js
 import {
-  CalendarMonth,
-  CalendarAgenda,
-  CalendarMultiDay
+  QEventCalendarMonth,
+  QEventCalendarAgenda,
+  QEventCalendarMultiDay
 } from 'quasar-calendar'
 ```
 
 In your template, you can just put in a calendar viewer using the current date as the start date
 
 ```html
-<calendar />
+<q-event-calendar />
 ```
 
 Or you can pass in parameters to customize
 
 ```html
-<calendar-month
+<q-event-calendar-month
   :start-date="Date('2019-01-01')"
   :event-array="someEventObject"
   :sunday-first-day-of-week="true"
@@ -108,7 +109,7 @@ The event data format is meant to be a subset of the [Google Calendar v3 API](ht
 
 Each object needs to have a unique ID. The date time should be in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. A value in the optional `timeZone` field will override the timezone.
 
-## Calendar event referencing
+## Calendar event referencing (TODO need refactoring)
 
 Each calendar is given a random reference string so that we can distinguish between multiple calendars on a page. You can override this and pass in a string so that you can listen for events from that calendar. In this case, if we pass in the string `MYCALENDAR`, the Vue.js event `click-event-MYCALENDAR` would fire on the [global event bus](http://quasar-framework.org/components/global-event-bus.html) when a calendar event is clicked on.
 
@@ -123,7 +124,7 @@ By default we use our own event detail popup when an event is clicked. You can o
 So to implement, be sure to have `prevent-event-detail` and `event-ref` set when you embed a calendar component:
 
 ```html
-<calendar
+<q-event-calendar
   event-ref="MYCALENDAR"
   :prevent-event-detail="true"
   :event-array="someEventObject"

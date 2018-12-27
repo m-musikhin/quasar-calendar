@@ -18,7 +18,7 @@
       :class="calculateDayEventClass(eventObject)"
       :style="calculateDayEventStyle(eventObject)"
     >
-      <calendar-event
+      <q-event-calendar-event
         v-if="!eventObject.start.isAllDay"
         :event-object="eventObject"
         :event-ref="eventRef"
@@ -39,12 +39,12 @@
 </template>
 
 <script>
-  import CalendarEvent from './CalendarEvent'
-  import CalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarEvent from './CalendarEvent'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
   import { date } from 'quasar'
   const { DateTime } = require('luxon')
   export default {
-    name: 'CalendarDayColumn',
+    name: 'QEventCalendarDayColumn',
     props: {
       startDate: {
         type: [Object, Date],
@@ -85,9 +85,9 @@
       }
     },
     components: {
-      CalendarEvent
+      QEventCalendarEvent
     },
-    mixins: [CalendarMixin],
+    mixins: [QEventCalendarMixin],
     data () {
       return {
         workingDate: new Date(),

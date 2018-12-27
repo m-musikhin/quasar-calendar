@@ -2,7 +2,7 @@
   <div class="calendar-month">
 
     <!-- calendar header -->
-    <calendar-header-nav
+    <q-event-calendar-header-nav
       time-period-unit="month"
       :time-period-amount="1"
       :move-time-period-emit="eventRef + ':navMovePeriod'"
@@ -11,7 +11,7 @@
     </calendar-header-nav>
 
     <div class="calendar-content">
-      <calendar-day-labels
+      <q-event-calendar-day-labels
         :number-of-days="7"
         :start-date="workingDate"
         :force-start-of-week="true"
@@ -69,7 +69,7 @@
                 v-for="thisEvent in monthGetDateEvents(thisDay.dateObject)"
                 :key="thisEvent.id"
               >
-                <calendar-event
+                <q-event-calendar-event
                   :event-object="thisEvent"
                   :month-style="true"
                   :event-ref="eventRef"
@@ -88,7 +88,7 @@
       </div>
     </div>
 
-    <calendar-event-detail
+    <q-event-calendar-event-detail
       ref="defaultEventDetail"
       v-if="!preventEventDetail"
       :event-object="eventDetailEventObject"
@@ -102,9 +102,9 @@
 </template>
 
 <script>
-  import CalendarMixin from './mixins/CalendarMixin'
-  import CalendarEventMixin from './mixins/CalendarEventMixin'
-  import CalendarParentComponentMixin from './mixins/CalendarParentComponentMixin'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarEventMixin from './mixins/CalendarEventMixin'
+  import QEventCalendarParentComponentMixin from './mixins/CalendarParentComponentMixin'
   import {
     QBtn,
     QTooltip,
@@ -114,19 +114,19 @@
     QScrollArea
   } from 'quasar'
   import QuantityBubble from './QuantityBubble'
-  import CalendarEvent from './CalendarEvent'
-  import CalendarDayLabels from './CalendarDayLabels'
-  import CalendarHeaderNav from './CalendarHeaderNav'
-  import CalendarEventDetail from './CalendarEventDetail'
+  import QEventCalendarEvent from './CalendarEvent'
+  import QEventCalendarDayLabels from './CalendarDayLabels'
+  import QEventCalendarHeaderNav from './CalendarHeaderNav'
+  import QEventCalendarEventDetail from './CalendarEventDetail'
   const { DateTime } = require('luxon')
   export default {
-    name: 'CalendarMonth',
+    name: 'QEventCalendarMonth',
     components: {
       QuantityBubble,
-      CalendarEvent,
-      CalendarDayLabels,
-      CalendarHeaderNav,
-      CalendarEventDetail,
+      QEventCalendarEvent,
+      QEventCalendarDayLabels,
+      QEventCalendarHeaderNav,
+      QEventCalendarEventDetail,
       QBtn,
       QTooltip,
       QTabs,
@@ -134,7 +134,7 @@
       QTabPane,
       QScrollArea
     },
-    mixins: [CalendarParentComponentMixin, CalendarMixin, CalendarEventMixin],
+    mixins: [QEventCalendarParentComponentMixin, QEventCalendarMixin, QEventCalendarEventMixin],
     props: {
       fullComponentRef: String
     },

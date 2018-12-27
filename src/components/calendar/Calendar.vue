@@ -34,7 +34,7 @@
       />
 
       <q-tab-pane name="tab-month" class="calendar-tab-pane-month">
-        <calendar-month
+        <q-event-calendar-month
           :ref="'month-' + thisRefName"
           :start-date="workingDate"
           :parsed-events="parsed"
@@ -48,7 +48,7 @@
         />
       </q-tab-pane>
       <q-tab-pane name="tab-week-component" class="calendar-tab-pane-week">
-        <calendar-multi-day
+        <q-event-calendar-multi-day
           :ref="'week-' + thisRefName"
           :start-date="workingDate"
           :parsed-events="parsed"
@@ -66,7 +66,7 @@
         />
       </q-tab-pane>
       <q-tab-pane name="tab-days-component" class="calendar-tab-pane-week">
-        <calendar-multi-day
+        <q-event-calendar-multi-day
           :ref="'days-' + thisRefName"
           :start-date="workingDate"
           :parsed-events="parsed"
@@ -84,7 +84,7 @@
         />
       </q-tab-pane>
       <q-tab-pane name="tab-single-day-component" class="calendar-tab-pane-week">
-        <calendar-multi-day
+        <q-event-calendar-multi-day
           :ref="'day-' + thisRefName"
           :start-date="workingDate"
           :parsed-events="parsed"
@@ -102,7 +102,7 @@
         />
       </q-tab-pane>
       <q-tab-pane name="tab-agenda" class="calendar-tab-pane-agenda">
-        <calendar-agenda
+        <q-event-calendar-agenda
           :ref="'agenda-' + thisRefName"
           :start-date="workingDate"
           :parsed-events="parsed"
@@ -123,17 +123,17 @@
 </template>
 
 <script>
-  import CalendarMixin from './mixins/CalendarMixin'
-  import CalendarEventMixin from './mixins/CalendarEventMixin'
-  import CalendarParentComponentMixin from './mixins/CalendarParentComponentMixin'
-  import CalendarEvent from './CalendarEvent'
-  import CalendarMonth from './CalendarMonth'
-  import CalendarMultiDay from './CalendarMultiDay'
-  import CalendarAgenda from './CalendarAgenda'
-  import CalendarDayColumn from './CalendarDayColumn'
-  import CalendarTimeLabelColumn from './CalendarTimeLabelColumn'
-  import CalendarDayLabels from './CalendarDayLabels'
-  import CalendarHeaderNav from './CalendarHeaderNav'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarEventMixin from './mixins/CalendarEventMixin'
+  import QEventCalendarParentComponentMixin from './mixins/CalendarParentComponentMixin'
+  import QEventCalendarEvent from './CalendarEvent'
+  import QEventCalendarMonth from './CalendarMonth'
+  import QEventCalendarMultiDay from './CalendarMultiDay'
+  import QEventCalendarAgenda from './CalendarAgenda'
+  import QEventCalendarDayColumn from './CalendarDayColumn'
+  import QEventCalendarTimeLabelColumn from './CalendarTimeLabelColumn'
+  import QEventCalendarDayLabels from './CalendarDayLabels'
+  import QEventCalendarHeaderNav from './CalendarHeaderNav'
   import {
     QBtn,
     QTooltip,
@@ -144,8 +144,8 @@
   } from 'quasar'
   import QuantityBubble from './QuantityBubble'
   export default {
-    name: 'Calendar',
-    mixins: [CalendarParentComponentMixin, CalendarMixin, CalendarEventMixin],
+    name: 'QEventCalendar',
+    mixins: [QEventCalendarParentComponentMixin, QEventCalendarMixin, QEventCalendarEventMixin],
     props: {
       tabLabels: {
         type: Object,
@@ -162,14 +162,14 @@
     },
     components: {
       QuantityBubble,
-      CalendarEvent,
-      CalendarMonth,
-      CalendarMultiDay,
-      CalendarAgenda,
-      CalendarDayColumn,
-      CalendarTimeLabelColumn,
-      CalendarDayLabels,
-      CalendarHeaderNav,
+      QEventCalendarEvent,
+      QEventCalendarMonth,
+      QEventCalendarMultiDay,
+      QEventCalendarAgenda,
+      QEventCalendarDayColumn,
+      QEventCalendarTimeLabelColumn,
+      QEventCalendarDayLabels,
+      QEventCalendarHeaderNav,
       QBtn,
       QTooltip,
       QTabs,

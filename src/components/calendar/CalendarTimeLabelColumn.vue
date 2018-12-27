@@ -12,10 +12,10 @@
 </template>
 
 <script>
-  import CalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
   const { DateTime } = require('luxon')
   export default {
-    name: 'CalendarTimeLabelColumn',
+    name: 'QEventCalendarTimeLabelColumn',
     props: {
       dayCellHeight: {
         type: String,
@@ -27,7 +27,7 @@
       }
     },
     components: {},
-    mixins: [CalendarMixin],
+    mixins: [QEventCalendarMixin],
     data () {
       return {}
     },

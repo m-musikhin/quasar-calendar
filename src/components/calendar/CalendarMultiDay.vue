@@ -2,7 +2,7 @@
   <div class="calendar-multi-day-component column fit no-wrap">
     <!-- week nav -->
     <template v-if="numDays === 1">
-      <calendar-header-nav
+      <q-event-calendar-header-nav
         time-period-unit="days"
         :time-period-amount="navDays"
         :move-time-period-emit="eventRef + ':navMovePeriod'"
@@ -12,7 +12,7 @@
       </calendar-header-nav>
     </template>
     <template v-else>
-      <calendar-header-nav
+      <q-event-calendar-header-nav
         time-period-unit="days"
         :time-period-amount="navDays"
         :move-time-period-emit="eventRef + ':navMovePeriod'"
@@ -22,7 +22,7 @@
     </template>
 
     <div v-if="numDays > 1" class="calendar-time-margin">
-      <calendar-day-labels
+      <q-event-calendar-day-labels
         :number-of-days="numDays"
         :show-dates="true"
         :start-date="workingDate"
@@ -35,7 +35,7 @@
 
     <!-- all day events -->
     <div class="calendar-time-margin">
-      <calendar-all-day-events
+      <q-event-calendar-all-day-events
         :number-of-days="numDays"
         :start-date="weekDateArray[0]"
         :parsed="parsed"
@@ -53,11 +53,11 @@
     >
       <div class="col">
         <div class="calendar-day row">
-          <calendar-time-label-column
+          <q-event-calendar-time-label-column
             :calendar-locale="calendarLocale"
           />
           <div class="calendar-multiple-days col row">
-            <calendar-day-column
+            <q-event-calendar-day-column
               v-for="thisDate in weekDateArray"
               :key="makeDT(thisDate).toISODate()"
               :start-date="thisDate"
@@ -76,7 +76,7 @@
 
     </q-scroll-area>
 
-    <calendar-event-detail
+    <q-event-calendar-event-detail
       ref="defaultEventDetail"
       v-if="!preventEventDetail"
       :event-object="eventDetailEventObject"
@@ -90,16 +90,16 @@
 </template>
 
 <script>
-  import CalendarMixin from './mixins/CalendarMixin'
-  import CalendarEventMixin from './mixins/CalendarEventMixin'
-  import CalendarParentComponentMixin from './mixins/CalendarParentComponentMixin'
-  import CalendarEvent from './CalendarEvent'
-  import CalendarDayColumn from './CalendarDayColumn'
-  import CalendarTimeLabelColumn from './CalendarTimeLabelColumn'
-  import CalendarDayLabels from './CalendarDayLabels'
-  import CalendarHeaderNav from './CalendarHeaderNav'
-  import CalendarAllDayEvents from './CalendarAllDayEvents'
-  import CalendarEventDetail from './CalendarEventDetail'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarEventMixin from './mixins/CalendarEventMixin'
+  import QEventCalendarParentComponentMixin from './mixins/CalendarParentComponentMixin'
+  import QEventCalendarEvent from './CalendarEvent'
+  import QEventCalendarDayColumn from './CalendarDayColumn'
+  import QEventCalendarTimeLabelColumn from './CalendarTimeLabelColumn'
+  import QEventCalendarDayLabels from './CalendarDayLabels'
+  import QEventCalendarHeaderNav from './CalendarHeaderNav'
+  import QEventCalendarAllDayEvents from './CalendarAllDayEvents'
+  import QEventCalendarEventDetail from './CalendarEventDetail'
   import {
     QBtn,
     QTooltip,
@@ -108,8 +108,8 @@
   } from 'quasar'
   const { getScrollTarget, setScrollPosition } = scroll
   export default {
-    name: 'CalendarMultiDay',
-    mixins: [CalendarParentComponentMixin, CalendarMixin, CalendarEventMixin],
+    name: 'QEventCalendarMultiDay',
+    mixins: [QEventCalendarParentComponentMixin, QEventCalendarMixin, QEventCalendarEventMixin],
     props: {
       numDays: {
         type: Number,
@@ -144,13 +144,13 @@
       fullComponentRef: String
     },
     components: {
-      CalendarEvent,
-      CalendarDayColumn,
-      CalendarTimeLabelColumn,
-      CalendarDayLabels,
-      CalendarHeaderNav,
-      CalendarAllDayEvents,
-      CalendarEventDetail,
+      QEventCalendarEvent,
+      QEventCalendarDayColumn,
+      QEventCalendarTimeLabelColumn,
+      QEventCalendarDayLabels,
+      QEventCalendarHeaderNav,
+      QEventCalendarAllDayEvents,
+      QEventCalendarEventDetail,
       QBtn,
       QTooltip,
       QScrollArea

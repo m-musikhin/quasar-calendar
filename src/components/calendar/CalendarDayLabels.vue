@@ -27,10 +27,10 @@
 </template>
 
 <script>
-  import CalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
   const { DateTime } = require('luxon')
   export default {
-    name: 'CalendarDayLabels',
+    name: 'QEventCalendarDayLabels',
     props: {
       startDate: {
         type: [Object, Date],
@@ -59,7 +59,7 @@
       }
     },
     components: {},
-    mixins: [CalendarMixin],
+    mixins: [QEventCalendarMixin],
     data () {
       return {
         dayCellHeight: 5,

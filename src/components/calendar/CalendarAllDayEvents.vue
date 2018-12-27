@@ -8,7 +8,7 @@
         'max-width': cellWidth
       }"
     >
-      <calendar-event
+      <q-event-calendar-event
         v-for="thisEvent in dateGetEvents(addDaysToDate(workingDate, addDays - 1))"
         :key="makeDT(addDaysToDate(workingDate, addDays - 1)).toISODate() + getEventIdString(thisEvent)"
         v-if="thisEvent.start.isAllDay"
@@ -25,11 +25,11 @@
 </template>
 
 <script>
-  import CalendarMixin from './mixins/CalendarMixin'
-  import CalendarEventMixin from './mixins/CalendarEventMixin'
-  import CalendarEvent from './CalendarEvent'
+  import QEventCalendarMixin from './mixins/CalendarMixin'
+  import QEventCalendarEventMixin from './mixins/CalendarEventMixin'
+  import QEventCalendarEvent from './CalendarEvent'
   export default {
-    name: 'CalendarAllDayEvents',
+    name: 'QEventCalendarAllDayEvents',
     props: {
       startDate: {
         type: [Object, Date],
@@ -50,9 +50,9 @@
       }
     },
     components: {
-      CalendarEvent
+      QEventCalendarEvent
     },
-    mixins: [CalendarMixin, CalendarEventMixin],
+    mixins: [QEventCalendarMixin, QEventCalendarEventMixin],
     data () {
       return {
         dayCellHeight: 5,
