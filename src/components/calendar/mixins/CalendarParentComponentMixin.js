@@ -1,9 +1,17 @@
 const { DateTime } = require('luxon')
 export default {
   props: {
+    value: {
+      type: [Object, Date],
+      default: new Date()
+    },
     startDate: {
       type: [Object, Date],
       default: () => { return new Date() }
+    },
+    clickable: {
+      type: Boolean,
+      default: false
     },
     eventArray: {
       type: Array,

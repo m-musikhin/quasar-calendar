@@ -1,6 +1,6 @@
 <template>
   <div class="calendar-test">
-    <q-tabs class="calendar-tabs" ref="fullCalendarTabs" inverted>
+    <q-tabs v-model="selectedTab" class="calendar-tabs" ref="fullCalendarTabs" inverted>
       <q-tab
         name="tab-month"
         icon="view_module"
@@ -45,6 +45,9 @@
           :calendar-timezone="calendarTimezone"
           :prevent-event-detail="preventEventDetail"
           :allow-editing="allowEditing"
+          :clickable="clickable"
+          :value="workingDate"
+          @input="clickMonthDay"
         />
       </q-tab-pane>
       <q-tab-pane name="tab-week-component" class="calendar-tab-pane-week">
@@ -179,9 +182,10 @@
     },
     data () {
       return {
+        selectedTab: 'tab-month',
         dayCellHeight: 5,
         dayCellHeightUnit: 'rem',
-        workingDate: new Date(),
+        workingDate: this.value,
         parsed: {
           byAllDayStartDate: {},
           byStartDate: {},
@@ -193,14 +197,15 @@
     },
     computed: {},
     methods: {
+      clickMonthDay (dateObject) {
+        // TODO add set date for component
+
+        this.selectedTab = 'tab-single-day-component'
+      },
       setupEventsHandling: function () {
         this.$root.$on(
           this.eventRef + ':navMovePeriod',
           this.calPackageMoveTimePeriod
-        )
-        this.$root.$on(
-          this.eventRef + ':moveToSingleDay',
-          this.switchToSingleDay
         )
         this.$root.$on(
           'update-event-' + this.eventRef,
@@ -213,10 +218,6 @@
           'calendar' + ':navMovePeriod',
           params
         )
-      },
-      switchToSingleDay: function (params) {
-        this.setTimePeriod(params)
-        this.$refs.fullCalendarTabs.selectTab('tab-single-day-component')
       },
       doUpdate: function () {
         this.mountSetDate()

@@ -182,9 +182,6 @@ export default {
       paramObj[params.unitType] = params.amount
       this.workingDate = this.workingDate.plus(paramObj)
     },
-    setTimePeriod: function (params) {
-      this.workingDate = params.dateObject
-    },
     getDayOfWeek: function () {
       return this.createThisDate(this.dayNumber).format('dddd')
     },
@@ -210,7 +207,7 @@ export default {
       }
     },
     mountSetDate: function () {
-      this.workingDate = this.makeDT(this.startDate)
+      this.workingDate = this.makeDT(this.value)
     },
     decimalAdjust: function (type, value, exp) {
       // from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor

@@ -42,14 +42,27 @@ Or you can pass in parameters to customize
 
 ```html
 <q-event-calendar-month
-  :start-date="Date('2019-01-01')"
+  v-model="currentDay"
   :event-array="someEventObject"
   :sunday-first-day-of-week="true"
-  calendar-locale="fr"
+  calendar-locale="en"
   calendar-timezone="Europe/Paris"
   :allow-editing="false"
 />
 ```
+or
+
+```html
+<q-event-calendar-month
+  :value="Date('2019-01-01')"
+  :event-array="someEventObject"
+  :sunday-first-day-of-week="true"
+  calendar-locale="en"
+  calendar-timezone="Europe/Paris"
+  :allow-editing="false"
+/>
+```
+
 
 ## Event data format
 
@@ -161,7 +174,8 @@ The usable components of `Calendar`, `CalendarMonth`, `CalendarMultiDay` and `Ca
 
 | Vue Property | Type | Description |
 | --- | --- | --- |
-| `start-date` | JavaScript Date or Luxon DateTime | A JavaScript Date or Luxon DateTime object that passes in a starting display date for the calendar to display. |
+| `v-model` | JavaScript variable with Date or Luxon DateTime | A JavaScript variable with Date or Luxon DateTime object that passes in a starting display date for the calendar to display. |
+| `clickable` | Boolean | Enable clicks and events on date cell, you can receive `input` event with dateObject (see `v-model`)  |
 | `sunday-first-day-of-week` | Boolean | If true this will force month and week calendars to start on a Sunday instead of the standard Monday. |
 | `calendar-locale` | String | A string setting the locale. We use the Luxon package for this and they describe how to set this [here](https://moment.github.io/luxon/docs/manual/intl.html). This will default to the user's system setting. |
 | `calendar-timezone` | String | Manually set the timezone for the calendar. Many strings can be passed in including `UTC` or any valid [IANA zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). This is better explained [here](https://moment.github.io/luxon/docs/manual/zones.html). |

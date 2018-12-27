@@ -7,7 +7,7 @@
       :time-period-amount="1"
       :move-time-period-emit="eventRef + ':navMovePeriod'"
     >
-      {{ formatDate(workingDate, 'MMMM yyyy') }}
+      {{ formatDate(workingDate, 'dd MMMM yyyy') }}
     </q-event-calendar-header-nav>
 
     <div class="calendar-content">
@@ -35,33 +35,25 @@
             'calendar-day': true,
             'calendar-cell': true,
             'calendar-day-weekend': isWeekendDay(thisDay.dateObject),
-            'calendar-day-current': isCurrentDate(thisDay.dateObject)
+            'calendar-day-current': isCurrentDate(thisDay.dateObject),
+            'cursor-pointer': calendarDaysAreClickable
           }"
           v-for="(thisDay, weekDayIndex) in thisWeek"
           :key="makeDT(thisDay.dateObject).toISODate()"
+          @click="handleDayClick(thisDay.dateObject)"
         >
           <div
-            v-if="isCurrentDate(thisDay.dateObject)"
             :class="{
               'calendar-day-number': true,
               'cursor-pointer': calendarDaysAreClickable
             }"
-            @click="handleDayClick(thisDay.dateObject)"
           >
             <quantity-bubble
+              v-if="isCurrentDate(thisDay.dateObject)"
               :quantity="thisDay.dateObject.day"
               :offset="false"
             />
-          </div>
-          <div
-            v-else
-            :class="{
-              'calendar-day-number': true,
-              'cursor-pointer': calendarDaysAreClickable
-            }"
-            @click="handleDayClick(thisDay.dateObject)"
-          >
-            {{ thisDay.dateObject.day }}
+            <div v-else>{{ thisDay.dateObject.day }}</div>
           </div>
           <div class="calendar-day-content">
             <template v-if="hasAnyEvents(thisDay.dateObject)">
@@ -136,7 +128,7 @@
     },
     mixins: [QEventCalendarParentComponentMixin, QEventCalendarMixin, QEventCalendarEventMixin],
     props: {
-      fullComponentRef: { 
+      fullComponentRef: {
         type: Boolean,
         default: false
       }
@@ -145,7 +137,7 @@
       return {
         dayCellHeight: 5,
         dayCellHeightUnit: 'rem',
-        workingDate: new Date(),
+        workingDate: this.value,
         weekArray: [],
         parsed: this.getDefaultParsed(),
         eventDetailEventObject: {}
@@ -153,7 +145,7 @@
     },
     computed: {
       calendarDaysAreClickable: function () {
-        return this.fullComponentRef
+        return this.clickable
       }
     },
     methods: {
@@ -229,8 +221,8 @@
         this.generateCalendarCellArray()
       },
       handleDayClick: function (dateObject) {
-        if (this.fullComponentRef) {
-          this.fullMoveToDay(dateObject)
+        if (this.clickable) {
+          this.$emit('input', dateObject)
         }
       }
     },
