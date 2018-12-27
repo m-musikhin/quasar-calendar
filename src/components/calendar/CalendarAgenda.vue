@@ -77,7 +77,7 @@
         {{ formatDate(workingDate, 'EEE, MMM d')}}
         -
         {{ formatDate(makeDT(workingDate).plus({ days: numJumpDays }), 'MMM d')}}
-      </calendar-header-nav>
+      </q-event-calendar-header-nav>
 
       <div
         v-for="daysForward in numJumpDays"

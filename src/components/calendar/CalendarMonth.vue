@@ -8,7 +8,7 @@
       :move-time-period-emit="eventRef + ':navMovePeriod'"
     >
       {{ formatDate(workingDate, 'MMMM yyyy') }}
-    </calendar-header-nav>
+    </q-event-calendar-header-nav>
 
     <div class="calendar-content">
       <q-event-calendar-day-labels

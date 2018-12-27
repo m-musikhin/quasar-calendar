@@ -9,7 +9,7 @@
         :calendar-locale="calendarLocale"
       >
         {{ formatDate(workingDate, 'EEEE, MMMM d, yyyy')}}
-      </calendar-header-nav>
+      </q-event-calendar-header-nav>
     </template>
     <template v-else>
       <q-event-calendar-header-nav
@@ -18,7 +18,7 @@
         :move-time-period-emit="eventRef + ':navMovePeriod'"
       >
         {{ getHeaderLabel() }}
-      </calendar-header-nav>
+      </q-event-calendar-header-nav>
     </template>
 
     <div v-if="numDays > 1" class="calendar-time-margin">
