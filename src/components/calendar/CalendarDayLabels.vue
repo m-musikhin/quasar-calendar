@@ -48,7 +48,10 @@
         type: Boolean,
         default: false
       },
-      fullComponentRef: String,
+      fullComponentRef: { 
+        type: Boolean,
+        default: false
+      },
       sundayFirstDayOfWeek: {
         type: Boolean,
         default: false
@@ -74,7 +77,7 @@
         return this.calculateDayCellWidth(this.numberOfDays)
       },
       calendarDaysAreClickable: function () {
-        return (this.fullComponentRef && this.fullComponentRef.length > 0)
+        return this.fullComponentRef
       }
     },
     methods: {

@@ -365,7 +365,7 @@ export default {
     },
 
     handleEventUpdate: function (eventObject) {
-      if (dashHas(this._props, 'fullComponentRef')) {
+      if (this.fullComponentRef) {
         // this component has a calendar parent, so don't move forward
         return
       }

@@ -136,7 +136,10 @@
     },
     mixins: [QEventCalendarParentComponentMixin, QEventCalendarMixin, QEventCalendarEventMixin],
     props: {
-      fullComponentRef: String
+      fullComponentRef: { 
+        type: Boolean,
+        default: false
+      }
     },
     data () {
       return {
@@ -150,7 +153,7 @@
     },
     computed: {
       calendarDaysAreClickable: function () {
-        return (this.fullComponentRef && this.fullComponentRef.length > 0)
+        return this.fullComponentRef
       }
     },
     methods: {

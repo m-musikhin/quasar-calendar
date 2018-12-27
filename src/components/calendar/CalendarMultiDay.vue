@@ -141,7 +141,10 @@
         type: String,
         default: 'auto'
       },
-      fullComponentRef: String
+      fullComponentRef: { 
+        type: Boolean,
+        default: false
+      }
     },
     components: {
       QEventCalendarEvent,

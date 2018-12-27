@@ -47,9 +47,10 @@ export default {
     fullMoveToDay: function (dateObject) {
       if (this.fullComponentRef) {
         this.$root.$emit(
-          this.fullComponentRef + ':moveToSingleDay', {
-            dateObject: dateObject
-          }
+          // TODO need replace
+          // this.fullComponentRef + ':moveToSingleDay', {
+          //  dateObject: dateObject
+          // }
         )
       }
     },
