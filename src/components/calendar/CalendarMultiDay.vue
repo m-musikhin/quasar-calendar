@@ -1,25 +1,14 @@
 <template>
   <div class="calendar-multi-day-component column fit no-wrap">
     <!-- week nav -->
-    <template v-if="numDays === 1">
-      <q-event-calendar-header-nav
-        time-period-unit="days"
-        :time-period-amount="navDays"
-        :move-time-period-emit="eventRef + ':navMovePeriod'"
+    <q-event-calendar-header-nav
+        period-unit="days"
+        :period-amount="navDays"
         :calendar-locale="calendarLocale"
+        v-model="workingDate"
       >
-        {{ formatDate(workingDate, 'EEEE, MMMM d, yyyy')}}
-      </q-event-calendar-header-nav>
-    </template>
-    <template v-else>
-      <q-event-calendar-header-nav
-        time-period-unit="days"
-        :time-period-amount="navDays"
-        :move-time-period-emit="eventRef + ':navMovePeriod'"
-      >
-        {{ getHeaderLabel() }}
-      </q-event-calendar-header-nav>
-    </template>
+        {{ formatDate(workingDate, navDateFormat)}}
+    </q-event-calendar-header-nav>
 
     <div v-if="numDays > 1" class="calendar-time-margin">
       <q-event-calendar-day-labels
@@ -160,7 +149,7 @@
     },
     data () {
       return {
-        workingDate: new Date(),
+        workingDate: this.value,
         weekDateArray: [],
         dayRowArray: [],
         parsed: this.getDefaultParsed(),
@@ -213,7 +202,6 @@
         }
       },
       doUpdate: function () {
-        this.mountSetDate()
         this.buildWeekDateArray(this.numDays, this.sundayFirstDayOfWeek)
         this.$nextTick(() => {
           this.scrollToFirstDay()

@@ -207,7 +207,8 @@ export default {
       }
     },
     mountSetDate: function () {
-      this.workingDate = this.makeDT(this.value)
+      // TODO remove function after refactoring
+      // this.workingDate = this.makeDT(this.value)
     },
     decimalAdjust: function (type, value, exp) {
       // from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor

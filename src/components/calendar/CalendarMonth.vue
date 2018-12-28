@@ -3,11 +3,11 @@
 
     <!-- calendar header -->
     <q-event-calendar-header-nav
-      time-period-unit="month"
-      :time-period-amount="1"
-      :move-time-period-emit="eventRef + ':navMovePeriod'"
+      period-unit="month"
+      :calendar-locale="calendarLocale"
+      v-model="workingDate"
     >
-      {{ formatDate(workingDate, 'dd MMMM yyyy') }}
+      {{ formatDate(workingDate, navDateFormat) }}
     </q-event-calendar-header-nav>
 
     <div class="calendar-content">
@@ -138,25 +138,27 @@
         dayCellHeight: 5,
         dayCellHeightUnit: 'rem',
         workingDate: this.value,
-        weekArray: [],
+        // weekArray: [],
         parsed: this.getDefaultParsed(),
         eventDetailEventObject: {}
       }
     },
     computed: {
-      calendarDaysAreClickable: function () {
+      weekArray () {
+        return this.getCalendarCellArray(
+          this.makeDT(this.workingDate).month,
+          this.makeDT(this.workingDate).year
+        )
+      },
+      calendarDaysAreClickable () {
         return this.clickable
       }
     },
     methods: {
-      monthGetDateEvents: function (dateObject) {
+      monthGetDateEvents (dateObject) {
         return this.dateGetEvents(dateObject)
       },
-      doUpdate: function () {
-        this.mountSetDate()
-        this.generateCalendarCellArray()
-      },
-      getCalendarCellArray: function (monthNumber, yearNumber) {
+      getCalendarCellArray (monthNumber, yearNumber) {
         let currentDay = this.makeDT(
           DateTime.fromObject({
             year: yearNumber,
@@ -203,36 +205,14 @@
         }
         return weekArray
       },
-      generateCalendarCellArray: function () {
-        this.weekArray = this.getCalendarCellArray(
-          this.makeDT(this.workingDate).month,
-          this.makeDT(this.workingDate).year
-        )
-      },
-      handleNavMove: function (params) {
-        this.moveTimePeriod(params)
-        this.$emit(
-          this.eventRef + ':navMovePeriod',
-          {
-            unitType: params.unitType,
-            amount: params.amount
-          }
-        )
-        this.generateCalendarCellArray()
-      },
-      handleDayClick: function (dateObject) {
+      handleDayClick (dateObject) {
         if (this.clickable) {
           this.$emit('input', dateObject)
         }
       }
     },
     mounted () {
-      this.doUpdate()
       this.handlePassedInEvents()
-      this.$root.$on(
-        this.eventRef + ':navMovePeriod',
-        this.handleNavMove
-      )
       this.$root.$on(
         'click-event-' + this.eventRef,
         this.handleEventDetailEvent

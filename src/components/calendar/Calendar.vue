@@ -66,6 +66,7 @@
           :prevent-event-detail="preventEventDetail"
           :allow-editing="allowEditing"
           :day-display-start-hour="dayDisplayStartHour"
+          :value="workingDate"
         />
       </q-tab-pane>
       <q-tab-pane name="tab-days-component" class="calendar-tab-pane-week">
@@ -84,6 +85,7 @@
           :prevent-event-detail="preventEventDetail"
           :allow-editing="allowEditing"
           :day-display-start-hour="dayDisplayStartHour"
+          :value="workingDate"
         />
       </q-tab-pane>
       <q-tab-pane name="tab-single-day-component" class="calendar-tab-pane-week">
@@ -102,6 +104,7 @@
           :prevent-event-detail="preventEventDetail"
           :allow-editing="allowEditing"
           :day-display-start-hour="dayDisplayStartHour"
+          :value="workingDate"
         />
       </q-tab-pane>
       <q-tab-pane name="tab-agenda" class="calendar-tab-pane-agenda">
@@ -118,6 +121,7 @@
           :calendar-timezone="calendarTimezone"
           :prevent-event-detail="preventEventDetail"
           :allow-editing="allowEditing"
+          :value="workingDate"
         />
       </q-tab-pane>
 
@@ -145,7 +149,6 @@
     QTabPane,
     QScrollArea
   } from 'quasar'
-  import QuantityBubble from './QuantityBubble'
   export default {
     name: 'QEventCalendar',
     mixins: [QEventCalendarParentComponentMixin, QEventCalendarMixin, QEventCalendarEventMixin],
@@ -164,7 +167,6 @@
       }
     },
     components: {
-      QuantityBubble,
       QEventCalendarEvent,
       QEventCalendarMonth,
       QEventCalendarMultiDay,
@@ -198,8 +200,7 @@
     computed: {},
     methods: {
       clickMonthDay (dateObject) {
-        // TODO add set date for component
-
+        this.workingDate = dateObject
         this.selectedTab = 'tab-single-day-component'
       },
       setupEventsHandling: function () {
@@ -218,13 +219,9 @@
           'calendar' + ':navMovePeriod',
           params
         )
-      },
-      doUpdate: function () {
-        this.mountSetDate()
       }
     },
     mounted () {
-      this.mountSetDate()
       this.parseEventList()
       this.setupEventsHandling()
     },

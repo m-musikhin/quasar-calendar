@@ -13,6 +13,10 @@ export default {
       type: Boolean,
       default: false
     },
+    navDateFormat: {
+      type: String,
+      default: 'dd MMMM yyyy'
+    },
     eventArray: {
       type: Array,
       default: () => []

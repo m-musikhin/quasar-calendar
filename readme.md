@@ -1,12 +1,14 @@
 # Quasar Event Calendar
-(based on project [Quasar Calendar by Stormseed](https://github.com/stormseed/quasar-calendar))
+(based on project [Quasar Calendar by Stormseed aka Chris Benjamin](https://github.com/stormseed/quasar-calendar))
+This project rewrite Quasar Calendar without Global bus events with using only local events and v-model for current day (start-day)
+
 An event display calendar for the Quasar framework. This is still a work in progress project but we're putting in functionality and squashing bugs on a consistent basis.
 
 ![screenshot](https://stormseed.github.io/quasar-calendar-demo/statics/quasar_calendar_snap.png)
 
 ## Demo
 
-You can see a demo of the calendar components with event data at:
+Sorry now no demo. You can see a demo of the Quasar calendar components with event data at:
 
 [Quasar calendar demo](https://stormseed.github.io/quasar-calendar-demo)
 
@@ -19,7 +21,7 @@ npm install quasar-calendar
 Add Calendar to you .vue page similar to a a Quasar component
 
 ```js
-import { QEventCalendar } from 'quasar-calendar'
+import { QEventCalendar } from 'quasar-event-calendar'
 ```
 
 or import individual components
@@ -29,7 +31,7 @@ import {
   QEventCalendarMonth,
   QEventCalendarAgenda,
   QEventCalendarMultiDay
-} from 'quasar-calendar'
+} from 'quasar-event-calendar'
 ```
 
 In your template, you can just put in a calendar viewer using the current date as the start date
@@ -176,6 +178,7 @@ The usable components of `Calendar`, `CalendarMonth`, `CalendarMultiDay` and `Ca
 | --- | --- | --- |
 | `v-model` | JavaScript variable with Date or Luxon DateTime | A JavaScript variable with Date or Luxon DateTime object that passes in a starting display date for the calendar to display. |
 | `clickable` | Boolean | Enable clicks and events on date cell, you can receive `input` event with dateObject (see `v-model`)  |
+| `nav-date-format` | String | Navigation header Date Format for [luxon.DateTime.toFormat](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toFormat), default 'dd MMMM yyyy' |
 | `sunday-first-day-of-week` | Boolean | If true this will force month and week calendars to start on a Sunday instead of the standard Monday. |
 | `calendar-locale` | String | A string setting the locale. We use the Luxon package for this and they describe how to set this [here](https://moment.github.io/luxon/docs/manual/intl.html). This will default to the user's system setting. |
 | `calendar-timezone` | String | Manually set the timezone for the calendar. Many strings can be passed in including `UTC` or any valid [IANA zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). This is better explained [here](https://moment.github.io/luxon/docs/manual/zones.html). |
@@ -206,3 +209,8 @@ In addition, each individual components have the following properties:
 | `num-days` | Number | The number of days to initially display and also the number of additional days to load up when the user scrolls to the bottom of the agenda. |
 | `agenda-style` | String | Defaults to "dot". You can also set this as "block" to use an infinite scroll design that is meant for mobile use. |
 | `scroll-height` | String | Defaults to `200px`, this is meant to define the size of the "block" style. |
+
+
+##TODO
+
+* Make computed events objects for cache and optimize perfomace, now recalculate on every render

@@ -2,7 +2,7 @@
   <div class="calendar-header col-auto row justify-between items-center">
     <div class="calendar-header-left col-auto">
       <q-btn
-        @click="doMoveTimePeriod(timePeriodUnit, -timePeriodAmount)"
+        @click="changePeriod(-1)"
         icon="chevron_left"
         color="primary"
         round
@@ -14,7 +14,7 @@
     </div>
     <div class="calendar-header-right col-auto">
       <q-btn
-        @click="doMoveTimePeriod(timePeriodUnit, timePeriodAmount)"
+        @click="changePeriod(+1)"
         icon="chevron_right"
         color="primary"
         round
@@ -25,45 +25,44 @@
 </template>
 
 <script>
+  const { DateTime } = require('luxon')
+
   import {
     QBtn
   } from 'quasar'
   export default {
     name: 'QEventCalendarHeaderNav',
     props: {
-      timePeriodUnit: {
+      value: {
+        type: [Object, Date],
+        required: true
+      },
+      periodUnit: {
         type: String,
         default: 'days'
       },
-      timePeriodAmount: {
+      periodAmount: {
         type: Number,
         default: 1
-      },
-      moveTimePeriodFunction: Object,
-      moveTimePeriodEmit: {
-        type: String,
-        default: 'calendar:navMovePeriod'
       }
     },
     components: {
       QBtn
     },
     data () {
-      return {}
+      return {
+        workingDate: this.value
+      }
     },
     computed: {},
     methods: {
-      doMoveTimePeriod (timePeriodUnit, timePeriodAmount) {
-        this.$root.$emit(
-          this.moveTimePeriodEmit,
-          {
-            unitType: timePeriodUnit,
-            amount: timePeriodAmount
-          }
-        )
+      changePeriod: function (param) {
+        let paramObj = {}
+        paramObj[this.periodUnit] = this.periodAmount * param
+        // console.log('AAA: ' + this.value + ' ===' + JSON.stringify((paramObj)))
+        this.$emit('input', DateTime.fromJSDate(this.value).plus(paramObj).toJSDate())
       }
-    },
-    mounted () {}
+    }
   }
 </script>
 

@@ -69,10 +69,10 @@
     <div v-else>
       <!-- calendar header -->
       <q-event-calendar-header-nav
-        time-period-unit="days"
-        :time-period-amount="1"
-        :move-time-period-emit="eventRef + ':navMovePeriod'"
+        period-unit="days"
+        :period-amount="1"
         :calendar-locale="calendarLocale"
+        v-model="workingDate"
       >
         {{ formatDate(workingDate, 'EEE, MMM d')}}
         -
@@ -190,7 +190,7 @@
     },
     data () {
       return {
-        workingDate: new Date(),
+        workingDate: this.value,
         numJumpDays: 28,
         localNumDays: 28,
         dayRowArray: [],
@@ -201,7 +201,7 @@
     },
     computed: {
       calendarDaysAreClickable: function () {
-        return this.fullComponentRef
+        return this.clickable
       }
     },
     methods: {
@@ -217,9 +217,6 @@
       loadMore: function (index, done) {
         this.localNumDays += this.numJumpDays
         done(true)
-      },
-      doUpdate: function () {
-        this.mountSetDate()
       },
       getWeekTitle: function (firstDate) {
         let lastDate = date.addToDate(firstDate, {days: 6})
@@ -248,12 +245,7 @@
     },
     mounted () {
       this.localNumDays = this.numDays
-      this.doUpdate()
       this.handlePassedInEvents()
-      this.$root.$on(
-        this.eventRef + ':navMovePeriod',
-        this.handleNavMove
-      )
       this.$root.$on(
         'click-event-' + this.eventRef,
         this.handleEventDetailEvent
