@@ -219,19 +219,8 @@ import {
       },
       setupEventsHandling: function () {
         this.$root.$on(
-          this.eventRef + ':navMovePeriod',
-          this.calPackageMoveTimePeriod
-        )
-        this.$root.$on(
           'update-event-' + this.eventRef,
           this.handleEventUpdate
-        )
-      },
-      calPackageMoveTimePeriod: function (params) {
-        this.moveTimePeriod(params)
-        this.$emit(
-          'calendar' + ':navMovePeriod',
-          params
         )
       }
     },

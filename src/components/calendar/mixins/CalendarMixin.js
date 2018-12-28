@@ -222,9 +222,6 @@ export default {
         -3
       ) + '%'
     },
-    createNewNavEventName: function () {
-      return 'calendar:navMovePeriod:' + this.createRandomString()
-    },
     createRandomString: function () {
       return Math.random().toString(36).substring(2, 15)
     },

@@ -220,16 +220,6 @@
       clickEvent (event) {
 
       },
-      handleNavMove (params) {
-        this.moveTimePeriod(params)
-        this.$emit(
-          this.eventRef + ':navMovePeriod',
-          {
-            unitType: params.unitType,
-            amount: params.amount
-          }
-        )
-      },
       handleDayClick (dateObject) {
         if (this.fullComponentRef) {
           this.fullMoveToDay(dateObject)

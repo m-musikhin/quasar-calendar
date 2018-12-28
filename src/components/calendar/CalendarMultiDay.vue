@@ -153,7 +153,6 @@
         weekDateArray: [],
         dayRowArray: [],
         parsed: this.getDefaultParsed(),
-        thisNavRef: this.createNewNavEventName(),
         eventDetailEventObject: {}
       }
     },
@@ -207,17 +206,7 @@
           this.scrollToFirstDay()
         })
       },
-      handleNavMove: function (unitType, amount) {
-        this.moveTimePeriod(unitType, amount)
-        this.$emit(
-          this.eventRef + ':navMovePeriod',
-          {
-            unitType: unitType,
-            amount: amount
-          }
-        )
-        this.buildWeekDateArray()
-      },
+      //  On navMovePeriod this.buildWeekDateArray()
       scrollToElement: function (el) {
         let target = getScrollTarget(el)
         let offset = el.offsetTop - el.scrollHeight
@@ -237,10 +226,6 @@
     mounted () {
       this.doUpdate()
       this.handlePassedInEvents()
-      this.$root.$on(
-        this.eventRef + ':navMovePeriod',
-        this.handleNavMove
-      )
       this.$root.$on(
         'update-event-' + this.eventRef,
         this.handleEventUpdate
