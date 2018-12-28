@@ -48,6 +48,7 @@
           :clickable="clickable"
           :value="workingDate"
           @input="clickMonthDay"
+          @click-event="clickCalendarEvent"
         />
       </q-tab-pane>
       <q-tab-pane name="tab-week-component" class="calendar-tab-pane-week">
@@ -122,10 +123,16 @@
           :prevent-event-detail="preventEventDetail"
           :allow-editing="allowEditing"
           :value="workingDate"
+          @click-event="clickCalendarEvent"
         />
       </q-tab-pane>
-
     </q-tabs>
+
+    <q-event-calendar-modal-detail
+      :allow-editing="allowEditing"
+      v-model="detailEventObject"
+    />
+
   </div>
 </template>
 
@@ -141,7 +148,8 @@
   import QEventCalendarTimeLabelColumn from './CalendarTimeLabelColumn'
   import QEventCalendarDayLabels from './CalendarDayLabels'
   import QEventCalendarHeaderNav from './CalendarHeaderNav'
-  import {
+  import QEventCalendarModalDetail from './CalendarModalDetail'
+import {
     QBtn,
     QTooltip,
     QTabs,
@@ -167,6 +175,7 @@
       }
     },
     components: {
+      QEventCalendarModalDetail,
       QEventCalendarEvent,
       QEventCalendarMonth,
       QEventCalendarMultiDay,
@@ -185,6 +194,7 @@
     data () {
       return {
         selectedTab: 'tab-month',
+        detailEventObject: null,
         dayCellHeight: 5,
         dayCellHeightUnit: 'rem',
         workingDate: this.value,
@@ -202,6 +212,10 @@
       clickMonthDay (dateObject) {
         this.workingDate = dateObject
         this.selectedTab = 'tab-single-day-component'
+      },
+      clickCalendarEvent (event) {
+        // console.log('clickCalendarEvent: ' + JSON.stringify(event))
+        this.detailEventObject = event
       },
       setupEventsHandling: function () {
         this.$root.$on(

@@ -6,6 +6,7 @@
     @hide="__close()"
     @escape-key="__close()"
   >
+    <!-- TODO refactoring to q-modal-layout and split to modal and detail components -->
     <div :class="getTopColorClasses">
       <div class="absolute-top-right row justify-end items-start ced-toolbar">
         <q-btn
@@ -338,12 +339,16 @@
   import QEventCalendarMixin from './mixins/CalendarMixin'
   const { DateTime } = require('luxon')
   export default {
-    name: 'QEventCalendarEventDetail',
+    name: 'QEventCalendarModalDetail',
     props: {
-      eventObject: {
+      value: {
+        type: Object,
+        required: true
+      },
+      /* eventObject: {
         type: Object,
         default: () => {}
-      },
+      }, */
       eventRef: {
         type: String,
         default: 'cal-' + Math.random().toString(36).substring(2, 15)
@@ -382,7 +387,8 @@
     mixins: [QEventCalendarMixin],
     data () {
       return {
-        modalIsOpen: false,
+        // eventObject: {}, // this.value,
+        // modalIsOpen: false,
         inEditMode: false,
         editEventObject: {},
         startDateObject: new Date(),
@@ -392,6 +398,19 @@
       }
     },
     computed: {
+      modalIsOpen: {
+        get () {
+          // console.log('===' + JSON.stringify(this.value))
+          return this.value !== null
+        },
+        set () {
+          this.$emit('input', null)
+        }
+      },
+      // TODO need rewrite
+      eventObject () {
+        return this.value !== null ? this.value : {}
+      },
       countAttendees: function () {
         if (!dashHas(this.eventObject, 'attendees')) {
           return 0
@@ -512,9 +531,8 @@
           this.eventObject
         )
         this.__close()
-      },
-    },
-    mounted () {}
+      }
+    }
   }
 </script>
 

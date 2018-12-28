@@ -2,7 +2,6 @@
   <div
     :class="getEventClass()"
     :style="getEventStyle()"
-    @click.stop="handleClick"
   >
     <template v-if="!eventHasPreviousDay() || (firstDayOfWeek && eventHasPreviousDay())">
       <span v-if="!isAllDayEvent() && showTime" class="calendar-event-start-time">
@@ -161,14 +160,8 @@
       },
       isAllDayEvent: function () {
         return this.eventObject.start.isAllDay
-      },
-      handleClick: function (e) {
-        this.eventObject.allowEditing = this.allowEditing
-        this.$emit('click', this.eventObject)
-        this.triggerEventClick(this.eventObject, this.eventRef)
       }
-    },
-    mounted () {}
+    }
   }
 </script>
 

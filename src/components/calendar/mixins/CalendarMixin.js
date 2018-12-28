@@ -35,12 +35,12 @@ export default {
         if (thisRef === undefined) {
           thisRef = 'defaultEventDetail'
         }
-        this.eventDetailEventObject = params
+        // this.eventDetailEventObject = params
         if (dashHas(this.$refs, thisRef + '.__open')) {
-          this.$refs[thisRef].__open()
+          // this.$refs[thisRef].__open()
         }
         else if (dashHas(this, thisRef + '.__open')) {
-          this[thisRef].__open()
+          // this[thisRef].__open()
         }
       }
     },

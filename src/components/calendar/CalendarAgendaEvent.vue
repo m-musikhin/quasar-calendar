@@ -3,7 +3,6 @@
     v-if="agendaStyle === 'dot'"
     :class="getDotEventClass()"
     :style="getEventStyle()"
-    @mouseup="handleClick"
   >
     <!-- dot style -->
     <div class="col-auto calendar-agenda-event-dot" :class="getDotClass()"></div>
@@ -27,7 +26,6 @@
     v-else
     :class="getEventClass()"
     :style="getEventStyle()"
-    @mouseup="handleClick"
   >
     <!-- block style -->
     <div class="calendar-agenda-event-summary">
@@ -77,18 +75,9 @@
         type: Boolean,
         default: false
       },
-      eventRef: String,
-      calendarLocale: {
-        type: String,
-        default: () => { return DateTime.local().locale }
-      },
       calendarTimezone: {
         type: String,
         default: () => { return DateTime.local().zoneName }
-      },
-      allowEditing: {
-        type: Boolean,
-        default: false
       }
     },
     components: {
@@ -143,11 +132,6 @@
           false
         )
         return returnString
-      },
-      handleClick: function (e) {
-        this.eventObject.allowEditing = this.allowEditing
-        this.$emit('click', this.eventObject)
-        this.triggerEventClick(this.eventObject, this.eventRef)
       }
     },
     mounted () {}

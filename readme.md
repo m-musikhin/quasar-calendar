@@ -49,7 +49,6 @@ Or you can pass in parameters to customize
   :sunday-first-day-of-week="true"
   calendar-locale="en"
   calendar-timezone="Europe/Paris"
-  :allow-editing="false"
 />
 ```
 or
@@ -61,7 +60,6 @@ or
   :sunday-first-day-of-week="true"
   calendar-locale="en"
   calendar-timezone="Europe/Paris"
-  :allow-editing="false"
 />
 ```
 
@@ -124,57 +122,13 @@ The event data format is meant to be a subset of the [Google Calendar v3 API](ht
 
 Each object needs to have a unique ID. The date time should be in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. A value in the optional `timeZone` field will override the timezone.
 
-## Calendar event referencing (TODO need refactoring)
+## Common QEventCalendar components
 
-Each calendar is given a random reference string so that we can distinguish between multiple calendars on a page. You can override this and pass in a string so that you can listen for events from that calendar. In this case, if we pass in the string `MYCALENDAR`, the Vue.js event `click-event-MYCALENDAR` would fire on the [global event bus](http://quasar-framework.org/components/global-event-bus.html) when a calendar event is clicked on.
+### Properties
 
-## Custom event detail handling
+The usable components of `QEventCalendar`, `QEventCalendarMonth`, `QEventCalendarMultiDay` and `QEventCalendarAgenda` share the following properties:
 
-By default we use our own event detail popup when an event is clicked. You can override this and use your own by doing a few things:
-
-* Pass in an event reference string
-* Prevent the default event detail from showing up
-* Listen for a click event to trigger your own detail content
-
-So to implement, be sure to have `prevent-event-detail` and `event-ref` set when you embed a calendar component:
-
-```html
-<q-event-calendar
-  event-ref="MYCALENDAR"
-  :prevent-event-detail="true"
-  :event-array="someEventObject"
-/>
-```
-
-And then somewhere be sure to be listening for a click event on that calendar:
-
-```js
-this.$root.$on(
-  'click-event-MYCALENDAR',
-  function (eventDetailObject) {
-    // do something here
-  }
-)
-```
-
-## Event editing
-
-Starting with v0.3 we are setting up the framework to allow for editing individual events. By default this functionality is turned off, but you can pass a value of `true` into the `allow-editing` parameter on one of the main calendar components. The functionality if very limited to start but we expect to be adding more features in the near future.
-
-When an event is edited, a global event bus message in the format of `update-event-MYCALENDAR` is sent with the updated event information as the payload. You can listen for this to trigger a call to whatever API you are using for calendar communication. Right now when an an update is detected the passed in `eventArray` array is updated and the array is parsed again.
-
-Only a subset of fields are currently editable:
-
-* Start / end time and date
-* Is an all-day event
-* Summary / title
-* Description
-
-## Individual Vue components
-
-The usable components of `Calendar`, `CalendarMonth`, `CalendarMultiDay` and `CalendarAgenda` share the following properties:
-
-| Vue Property | Type | Description |
+| Property | Type | Description |
 | --- | --- | --- |
 | `v-model` | JavaScript variable with Date or Luxon DateTime | A JavaScript variable with Date or Luxon DateTime object that passes in a starting display date for the calendar to display. |
 | `clickable` | Boolean | Enable clicks and events on date cell, you can receive `input` event with dateObject (see `v-model`)  |
@@ -182,19 +136,43 @@ The usable components of `Calendar`, `CalendarMonth`, `CalendarMultiDay` and `Ca
 | `sunday-first-day-of-week` | Boolean | If true this will force month and week calendars to start on a Sunday instead of the standard Monday. |
 | `calendar-locale` | String | A string setting the locale. We use the Luxon package for this and they describe how to set this [here](https://moment.github.io/luxon/docs/manual/intl.html). This will default to the user's system setting. |
 | `calendar-timezone` | String | Manually set the timezone for the calendar. Many strings can be passed in including `UTC` or any valid [IANA zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). This is better explained [here](https://moment.github.io/luxon/docs/manual/zones.html). |
-| `event-ref` | String | Give the calendar component a custom name so that events triggered on the global event bus can be watched. |
-| `prevent-event-detail` | Boolean | Prevent the default event detail popup from appearing when an event is clicked in a calendar. |
-| `allow-editing` | Boolean | Allows for individual events to be edited. See the editing section. |
 | `day-display-start-hour` | Number| Will scroll to a defined start hour when a day / multi-day component is rendered. Pass in the hour of the day from 0-23, the default being `7`. Current has no effect on the `CalendarAgenda` component. |
+
+### Events
+
+| Event | Parameters | Desription |
+| @input | Date Object | On change workingDate (Also use v-model instead :value and @input) |
+| @click-event | Event Object | On click by event |
 
 In addition, each individual components have the following properties:
 
-### Calendar
+### Editing (not yet)
+
+To edit event, you must set property `editing` on `QEventCalendarModalDetail` component
+
+Typical usage:
+
+```html
+    <q-event-calendar-month
+      :clickable="true"
+      v-model="workingDate"
+      @click-event="detailEventObject = $event.target.value"
+    />
+
+    <q-event-calendar-modal-detail
+      :editing="true"
+      v-model="detailEventObject"
+      @update="updateAction"
+    />
+```
+See sample in source `Calendar.vue`
+
+## QEventCalendar
 | Vue Property | Type | Description |
 | --- | --- | --- |
 | `tab-labels` | Object | Passing in an object with strings that will override the labels for the different calendar components. Set variables for `month`, `week`, `threeDay`, `day` and `agenda`. Eventually we will replace this with language files and will use the `calendar-locale` setting. |
 
-### CalendarMultiDay
+## QEventCalendarMultiDay
 
 | Vue Property | Type | Description |
 | --- | --- | --- |
@@ -202,7 +180,7 @@ In addition, each individual components have the following properties:
 | `nav-days` | Number | This is how many days the previous / next navigation buttons will jump. |
 | `force-start-of-week` | Boolean | Default is `false`. This is appropriate if you have a week display (7 days) that you want to always start on the first day of the week. |
 
-### CalendarAgenda
+## QEventCalendarAgenda
 
 | Vue Property | Type | Description |
 | --- | --- | --- |
@@ -210,7 +188,19 @@ In addition, each individual components have the following properties:
 | `agenda-style` | String | Defaults to "dot". You can also set this as "block" to use an infinite scroll design that is meant for mobile use. |
 | `scroll-height` | String | Defaults to `200px`, this is meant to define the size of the "block" style. |
 
+## QEventCalendarModalDetail
+
+### Properties
+
+| Property | Type | Description |
+
+## Events
+
+| Event | Parameters | Desription |
+
 
 ##TODO
 
 * Make computed events objects for cache and optimize perfomace, now recalculate on every render
+* Separete QEventCalendarModalDetel to Modal and Detail, for possible using Detail with vue routing instad QModal
+* Don't work editing now

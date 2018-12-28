@@ -53,10 +53,9 @@
                 v-for="thisEvent in dateGetEvents(forwardDate)"
                 :key="makeDT(forwardDate).toISODate() + getEventIdString(thisEvent)"
                 :event-object="thisEvent"
-                :event-ref="eventRef"
                 :calendar-locale="calendarLocale"
                 :calendar-timezone="calendarTimezone"
-                :allow-editing="allowEditing"
+                @click.stop="$emit('click-event', thisEvent)"
               />
             </div>
           </div>
@@ -112,6 +111,7 @@
                 v-if="dateGetEvents(forwardDate)"
                 v-for="thisEvent in dateGetEvents(forwardDate, true)"
                 :key="makeDT(forwardDate).toISODate() + getEventIdString(thisEvent)"
+                @click.stop="$emit('click-event', thisEvent)"
               >
                 <q-event-calendar-agenda-event
                   :event-object="thisEvent"
@@ -127,14 +127,6 @@
       </div>
     </div>
 
-    <q-event-calendar-event-detail
-      ref="defaultEventDetail"
-      v-if="!preventEventDetail"
-      :event-object="eventDetailEventObject"
-      :event-ref="eventRef"
-      :allow-editing="allowEditing"
-    />
-
   </div>
 </template>
 
@@ -143,7 +135,6 @@
   import QEventCalendarEventMixin from './mixins/CalendarEventMixin'
   import QEventCalendarParentComponentMixin from './mixins/CalendarParentComponentMixin'
   import QEventCalendarAgendaEvent from './CalendarAgendaEvent'
-  import QEventCalendarEventDetail from './CalendarEventDetail'
   import QEventCalendarHeaderNav from './CalendarHeaderNav'
   import {
     date,
@@ -157,7 +148,6 @@
     name: 'QEventCalendarAgenda',
     components: {
       QEventCalendarAgendaEvent,
-      QEventCalendarEventDetail,
       QEventCalendarHeaderNav,
       QBtn,
       QTooltip,
@@ -200,25 +190,25 @@
       }
     },
     computed: {
-      calendarDaysAreClickable: function () {
+      calendarDaysAreClickable () {
         return this.clickable
       }
     },
     methods: {
-      getDaysForwardDate: function (daysForward) {
+      getDaysForwardDate (daysForward) {
         return date.addToDate(this.workingDate, {days: daysForward})
       },
-      isFirstOfMonth: function (thisDate) {
+      isFirstOfMonth (thisDate) {
         return thisDate.getDate() === 1
       },
-      isFirstDayOfWeek: function (thisDate) {
+      isFirstDayOfWeek (thisDate) {
         return date.getDayOfWeek(thisDate) === 1
       },
-      loadMore: function (index, done) {
+      loadMore (index, done) {
         this.localNumDays += this.numJumpDays
         done(true)
       },
-      getWeekTitle: function (firstDate) {
+      getWeekTitle (firstDate) {
         let lastDate = date.addToDate(firstDate, {days: 6})
         if (firstDate.getMonth() === lastDate.getMonth()) {
           return this.formatDate(firstDate, 'MMM d - ') + this.formatDate(lastDate, 'd')
@@ -227,7 +217,10 @@
           return this.formatDate(firstDate, 'MMM d - ') + this.formatDate(lastDate, 'MMM d')
         }
       },
-      handleNavMove: function (params) {
+      clickEvent (event) {
+
+      },
+      handleNavMove (params) {
         this.moveTimePeriod(params)
         this.$emit(
           this.eventRef + ':navMovePeriod',
@@ -237,7 +230,7 @@
           }
         )
       },
-      handleDayClick: function (dateObject) {
+      handleDayClick (dateObject) {
         if (this.fullComponentRef) {
           this.fullMoveToDay(dateObject)
         }

@@ -88,7 +88,7 @@
   import QEventCalendarDayLabels from './CalendarDayLabels'
   import QEventCalendarHeaderNav from './CalendarHeaderNav'
   import QEventCalendarAllDayEvents from './CalendarAllDayEvents'
-  import QEventCalendarEventDetail from './CalendarEventDetail'
+  import QEventCalendarModalDetail from './CalendarModalDetail'
   import {
     QBtn,
     QTooltip,
@@ -142,7 +142,7 @@
       QEventCalendarDayLabels,
       QEventCalendarHeaderNav,
       QEventCalendarAllDayEvents,
-      QEventCalendarEventDetail,
+      QEventCalendarModalDetail,
       QBtn,
       QTooltip,
       QScrollArea

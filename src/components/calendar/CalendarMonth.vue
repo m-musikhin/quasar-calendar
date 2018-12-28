@@ -60,6 +60,7 @@
               <div
                 v-for="thisEvent in monthGetDateEvents(thisDay.dateObject)"
                 :key="thisEvent.id"
+                @click.stop="$emit('click-event', thisEvent)"
               >
                 <q-event-calendar-event
                   :event-object="thisEvent"
@@ -80,16 +81,6 @@
       </div>
     </div>
 
-    <q-event-calendar-event-detail
-      ref="defaultEventDetail"
-      v-if="!preventEventDetail"
-      :event-object="eventDetailEventObject"
-      :calendar-locale="calendarLocale"
-      :calendar-timezone="calendarTimezone"
-      :event-ref="eventRef"
-      :allow-editing="allowEditing"
-    />
-
   </div>
 </template>
 
@@ -109,7 +100,7 @@
   import QEventCalendarEvent from './CalendarEvent'
   import QEventCalendarDayLabels from './CalendarDayLabels'
   import QEventCalendarHeaderNav from './CalendarHeaderNav'
-  import QEventCalendarEventDetail from './CalendarEventDetail'
+  import QEventCalendarModalDetail from './CalendarModalDetail'
   const { DateTime } = require('luxon')
   export default {
     name: 'QEventCalendarMonth',
@@ -118,7 +109,7 @@
       QEventCalendarEvent,
       QEventCalendarDayLabels,
       QEventCalendarHeaderNav,
-      QEventCalendarEventDetail,
+      QEventCalendarModalDetail,
       QBtn,
       QTooltip,
       QTabs,
