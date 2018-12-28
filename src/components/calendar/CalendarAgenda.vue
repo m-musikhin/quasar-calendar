@@ -240,10 +240,6 @@
       this.localNumDays = this.numDays
       this.handlePassedInEvents()
       this.$root.$on(
-        'click-event-' + this.eventRef,
-        this.handleEventDetailEvent
-      )
-      this.$root.$on(
         'update-event-' + this.eventRef,
         this.handleEventUpdate
       )

@@ -242,10 +242,6 @@
         this.handleNavMove
       )
       this.$root.$on(
-        'click-event-' + this.eventRef,
-        this.handleEventDetailEvent
-      )
-      this.$root.$on(
         'update-event-' + this.eventRef,
         this.handleEventUpdate
       )

@@ -30,20 +30,6 @@ export default {
         eventObject
       )
     },
-    handleEventDetailEvent: function (params, thisRef) {
-      if (!this.preventEventDetail) {
-        if (thisRef === undefined) {
-          thisRef = 'defaultEventDetail'
-        }
-        // this.eventDetailEventObject = params
-        if (dashHas(this.$refs, thisRef + '.__open')) {
-          // this.$refs[thisRef].__open()
-        }
-        else if (dashHas(this, thisRef + '.__open')) {
-          // this[thisRef].__open()
-        }
-      }
-    },
     fullMoveToDay: function (dateObject) {
       if (this.fullComponentRef) {
         this.$root.$emit(

@@ -136,7 +136,7 @@ The usable components of `QEventCalendar`, `QEventCalendarMonth`, `QEventCalenda
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `v-model` | JavaScript variable with Date or Luxon DateTime | A JavaScript variable with Date or Luxon DateTime object that passes in a starting display date for the calendar to display. |
+| `v-model` | DateTime | A JavaScript variable with Date or Luxon DateTime object that passes in a starting display date for the calendar to display. |
 | `clickable` | Boolean | Enable clicks and events on date cell, you can receive `input` event with dateObject (see `v-model`)  |
 | `nav-date-format` | String | Navigation header Date Format for [luxon.DateTime.toFormat](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toFormat), default 'dd MMMM yyyy' |
 | `sunday-first-day-of-week` | Boolean | If true this will force month and week calendars to start on a Sunday instead of the standard Monday. |
@@ -148,8 +148,8 @@ The usable components of `QEventCalendar`, `QEventCalendarMonth`, `QEventCalenda
 
 | Event | Parameters | Desription |
 | --- | --- | --- |
-| @input | Date Object | On change workingDate (Also use v-model instead :value and @input) |
-| @click-event | Event Object | On click by event |
+| `@input` | Date Object | On change workingDate (Also use v-model instead :value and @input) |
+| `@click-event` | Event Object | On click by event |
 
 In addition, each individual components have the following properties:
 
