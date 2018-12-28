@@ -15,8 +15,14 @@ Sorry now no demo. You can see a demo of the Quasar calendar components with eve
 ## Setup
 
 ```shell
-npm install quasar-calendar
+npm install quasar-event-calendar (not yet)
 ```
+
+Sorry now only from git
+```shell
+npm install git+https://github.com/m-musikhin/quasar-event-calendar.git
+```
+
 
 Add Calendar to you .vue page similar to a a Quasar component
 
@@ -141,6 +147,7 @@ The usable components of `QEventCalendar`, `QEventCalendarMonth`, `QEventCalenda
 ### Events
 
 | Event | Parameters | Desription |
+| --- | --- | --- |
 | @input | Date Object | On change workingDate (Also use v-model instead :value and @input) |
 | @click-event | Event Object | On click by event |
 
@@ -193,10 +200,12 @@ See sample in source `Calendar.vue`
 ### Properties
 
 | Property | Type | Description |
+| --- | --- | --- |
 
 ## Events
 
 | Event | Parameters | Desription |
+| --- | --- | --- |
 
 
 ##TODO
