@@ -17,6 +17,14 @@ export default {
       type: String,
       default: 'dd MMMM yyyy'
     },
+    format24h: {
+      type: Boolean,
+      default: true
+    },
+    firstDayOfWeek: {
+      type: Number,
+      default: 1
+    },
     eventArray: {
       type: Array,
       default: () => []

@@ -1,8 +1,9 @@
 # Quasar Event Calendar
+!!!QEventCalendar work ONLY in [Quasar framework](https://quasar-framework.org/) eviroment!!!
 (based on project [Quasar Calendar by Stormseed aka Chris Benjamin](https://github.com/stormseed/quasar-calendar))
 This project rewrite Quasar Calendar without Global bus events with using only local events and v-model for current day (start-day)
 
-An event display calendar for the Quasar framework. This is still a work in progress project but we're putting in functionality and squashing bugs on a consistent basis.
+An event display calendar for the [Quasar framework](https://quasar-framework.org/). This is still a work in progress project but we're putting in functionality and squashing bugs on a consistent basis.
 
 ![screenshot](https://stormseed.github.io/quasar-calendar-demo/statics/quasar_calendar_snap.png)
 
@@ -139,7 +140,8 @@ The usable components of `QEventCalendar`, `QEventCalendarMonth`, `QEventCalenda
 | `v-model` | DateTime | A JavaScript variable with Date or Luxon DateTime object that passes in a starting display date for the calendar to display. |
 | `clickable` | Boolean | Enable clicks and events on date cell, you can receive `input` event with dateObject (see `v-model`)  |
 | `nav-date-format` | String | Navigation header Date Format for [luxon.DateTime.toFormat](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toFormat), default 'dd MMMM yyyy' |
-| `sunday-first-day-of-week` | Boolean | If true this will force month and week calendars to start on a Sunday instead of the standard Monday. |
+| `first-day-of-week` | Number | 0-6, 0 - Sunday, 1 Monday, …. Same [Datetime Picker](https://quasar-framework.org/components/datetime-picker.html). Replace `sunday-first-day-of-week`  |
+| `format24h` | Boolean | Override default i18n setting. Use 24 hour time for Material picker instead of AM/PM system which is default. Same [Datetime Picker](https://quasar-framework.org/components/datetime-picker.html)  |
 | `calendar-locale` | String | A string setting the locale. We use the Luxon package for this and they describe how to set this [here](https://moment.github.io/luxon/docs/manual/intl.html). This will default to the user's system setting. |
 | `calendar-timezone` | String | Manually set the timezone for the calendar. Many strings can be passed in including `UTC` or any valid [IANA zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). This is better explained [here](https://moment.github.io/luxon/docs/manual/zones.html). |
 | `day-display-start-hour` | Number| Will scroll to a defined start hour when a day / multi-day component is rendered. Pass in the hour of the day from 0-23, the default being `7`. Current has no effect on the `CalendarAgenda` component. |

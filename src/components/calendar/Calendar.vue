@@ -146,10 +146,8 @@
   import QEventCalendarAgenda from './CalendarAgenda'
   import QEventCalendarDayColumn from './CalendarDayColumn'
   import QEventCalendarTimeLabelColumn from './CalendarTimeLabelColumn'
-  import QEventCalendarDayLabels from './CalendarDayLabels'
-  import QEventCalendarHeaderNav from './CalendarHeaderNav'
   import QEventCalendarModalDetail from './CalendarModalDetail'
-import {
+  import {
     QBtn,
     QTooltip,
     QTabs,
@@ -182,8 +180,6 @@ import {
       QEventCalendarAgenda,
       QEventCalendarDayColumn,
       QEventCalendarTimeLabelColumn,
-      QEventCalendarDayLabels,
-      QEventCalendarHeaderNav,
       QBtn,
       QTooltip,
       QTabs,

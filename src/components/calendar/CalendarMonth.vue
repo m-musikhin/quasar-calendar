@@ -11,13 +11,15 @@
     </q-event-calendar-header-nav>
 
     <div class="calendar-content">
-      <q-event-calendar-day-labels
-        :number-of-days="7"
-        :start-date="workingDate"
-        :force-start-of-week="true"
-        :sunday-first-day-of-week="sundayFirstDayOfWeek"
-        :calendar-locale="calendarLocale"
-      />
+      <div class="calendar-day-labels row no-wrap justify-end">
+        <div
+          v-for="dayName in headerDayNames"
+          :key="dayName"
+          class="calendar-day-label"
+       >
+          {{dayName}}
+        </div>
+      </div>
       <div
         v-for="(thisWeek, index) in weekArray"
         :key="index"
@@ -53,7 +55,7 @@
               :quantity="thisDay.dateObject.day"
               :offset="false"
             />
-            <div v-else>{{ thisDay.dateObject.day }}</div>
+            <template v-else>{{ thisDay.dateObject.day }}</template>
           </div>
           <div class="calendar-day-content">
             <template v-if="hasAnyEvents(thisDay.dateObject)">
@@ -98,7 +100,6 @@
   } from 'quasar'
   import QuantityBubble from './QuantityBubble'
   import QEventCalendarEvent from './CalendarEvent'
-  import QEventCalendarDayLabels from './CalendarDayLabels'
   import QEventCalendarHeaderNav from './CalendarHeaderNav'
   import QEventCalendarModalDetail from './CalendarModalDetail'
   const { DateTime } = require('luxon')
@@ -107,7 +108,6 @@
     components: {
       QuantityBubble,
       QEventCalendarEvent,
-      QEventCalendarDayLabels,
       QEventCalendarHeaderNav,
       QEventCalendarModalDetail,
       QBtn,
@@ -242,7 +242,10 @@
         max-width $cellWidth
         padding 0
       .calendar-day-labels
+        padding 0
         .calendar-day-label
+          width $sevenCellWidth
+          text-align right
           font-size 1.1em
         .calendar-day-label-current
           font-weight bold
@@ -259,7 +262,8 @@
         .calendar-day-number
           font-size 0.9em
           height 2em
-          width 2em
+          width 100%
+          text-align right
           vertical-align middle
           padding-top .25em
           padding-left .25em
